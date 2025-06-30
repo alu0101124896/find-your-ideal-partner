@@ -43,7 +43,7 @@ def set_streamlit_page_config():
     st.set_page_config(
         page_title="Formulario de adopción",
         page_icon=":dog:",
-        # layout="wide",
+        layout="centered",
     )
     max_width_str = f"max-width: {80}%;"
     st.markdown(
@@ -113,7 +113,7 @@ def define_layout_and_process_client_input():
             answer = st.selectbox(
                 question["question"],
                 options=question["options"].keys(),
-                # index=None,
+                index=None,
                 placeholder="Selecciona una opción",
             )
             client_answers.append(
@@ -169,12 +169,12 @@ def define_layout_and_process_client_input():
         # If the form has not been submitted, do not process the input
         return
 
-    # if not (terms and privacy_policy):
-    #     st.error(
-    #         "Por favor, acepta los términos y condiciones y la política de privacidad"
-    #         + " para poder proceder."
-    #     )
-    #     return
+    if not (terms and privacy_policy):
+        st.error(
+            "Por favor, acepta los términos y condiciones y la política de privacidad"
+            + " para poder proceder."
+        )
+        return
 
     if None in client_answers:
         st.error("Por favor, responde a todas las preguntas del formulario.")

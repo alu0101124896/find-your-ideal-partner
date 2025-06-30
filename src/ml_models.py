@@ -145,7 +145,7 @@ def preprocess_train_data(
     """
     Preprocess the training data for the KNN model.
 
-    Warning: This function will overwrite the existing scaler model with the a new one.
+    Warning: This function will overwrite the existing scaler model with the new one.
     """
 
     if dogs_df is None:
