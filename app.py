@@ -159,6 +159,12 @@ def define_layout_and_process_client_input():
             "ENVIAR",
             use_container_width=True,
             type="primary",
+            on_click=lambda: st.session_state.update(
+                form_submitted=True,
+                next_recommendation=False,
+                previous_recommendation=False,
+                current_pet_id=0,
+            ),
         )
 
     if not (
