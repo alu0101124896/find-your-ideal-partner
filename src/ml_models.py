@@ -35,7 +35,7 @@ except ImportError:
 
 
 __knn_model = None
-__vae_model = None
+# __vae_model = None
 __scaler_model = None
 __chars_means = None
 __dogs_df = None
@@ -50,7 +50,7 @@ def setup_nn_models(
     """Set up the neural network models for the application."""
 
     global __knn_model
-    global __vae_model
+    # global __vae_model
     global __scaler_model
     global __chars_means
     global __dogs_df
@@ -60,9 +60,9 @@ def setup_nn_models(
     __knn_model = load_model(knn_model_path)
     assert isinstance(__knn_model, NearestNeighbors)
 
-    # Load the pre-trained VAE model
-    __vae_model = load_model(vae_model_path)
-    assert isinstance(__vae_model, VAE)
+    # # Load the pre-trained VAE model
+    # __vae_model = load_model(vae_model_path)
+    # assert isinstance(__vae_model, VAE)
 
     # Load the dataset of pets currently available for adoption
     __dogs_df = load_dataset(dogs_df_path)
@@ -489,39 +489,39 @@ def unscale_numerical_features(
     return unscaled_input
 
 
-def impute_realistic_values(
-    input_data: pd.Series,
-    user_provided_features: list[str] = None,
-    vae_model: VAE = None,
-) -> pd.Series:
-    """Impute realistic values for the client input data using a pre-trained VAE model."""
-
-    if vae_model is None:
-        global __vae_model
-        assert isinstance(__vae_model, VAE)
-        vae_model = __vae_model
-
-    reconstructed_input_data = input_data.copy()
-
-    # Convert the client input to a tensor
-    input_tensor = torch.tensor(
-        input_data.values.astype(np.float32).reshape(1, -1),
-        dtype=torch.float32,
-    )
-
-    # Evaluate the VAE model to get the reconstructed output
-    model_inference_result = vae_model.impute_missing_values(input_tensor)
-
-    # Convert the reconstructed output back to a pandas Series and ensure the
-    #  reconstructed output is on the CPU and detached from the computation graph
-    reconstructed_input_data.update(
-        pd.Series(
-            model_inference_result.cpu().detach().squeeze().numpy(),
-            index=input_data.index,
-        ).loc[
-            # ignore the features that WERE provided by the user
-            (index not in user_provided_features for index in input_data.index)
-        ]
-    )
-
-    return reconstructed_input_data
+# def impute_realistic_values(
+#     input_data: pd.Series,
+#     user_provided_features: list[str] = None,
+#     vae_model: VAE = None,
+# ) -> pd.Series:
+#     """Impute realistic values for the client input data using a pre-trained VAE model."""
+#
+#     if vae_model is None:
+#         global __vae_model
+#         assert isinstance(__vae_model, VAE)
+#         vae_model = __vae_model
+#
+#     reconstructed_input_data = input_data.copy()
+#
+#     # Convert the client input to a tensor
+#     input_tensor = torch.tensor(
+#         input_data.values.astype(np.float32).reshape(1, -1),
+#         dtype=torch.float32,
+#     )
+#
+#     # Evaluate the VAE model to get the reconstructed output
+#     model_inference_result = vae_model.impute_missing_values(input_tensor)
+#
+#     # Convert the reconstructed output back to a pandas Series and ensure the
+#     #  reconstructed output is on the CPU and detached from the computation graph
+#     reconstructed_input_data.update(
+#         pd.Series(
+#             model_inference_result.cpu().detach().squeeze().numpy(),
+#             index=input_data.index,
+#         ).loc[
+#             # ignore the features that WERE provided by the user
+#             (index not in user_provided_features for index in input_data.index)
+#         ]
+#     )
+#
+#     return reconstructed_input_data
