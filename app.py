@@ -13,7 +13,7 @@ import streamlit as st
 def main():
     # Set up the Streamlit page configuration
     pg = st.navigation(
-        [
+        pages=[
             st.Page(
                 "./pages/home.py",
                 title="Home",
@@ -40,7 +40,8 @@ def main():
                 title="Feedback Form",
                 icon="✍️",
             ),
-        ]
+        ],
+        expanded=True,
     )
     pg.run()
 
