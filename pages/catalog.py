@@ -34,10 +34,8 @@ def main():
         + " el catálogo y ver la información destacada de cada perro."
     )
 
-    st.write("---")  # Separator between rows
-
     for current_batch in st.session_state.dataset_iterator:
-        col1, col2, col3 = st.columns(3)
+        col1, col2, col3 = st.columns(3, border=True)
 
         with col1:
             display_dog_info(st.session_state.dogs_df.loc[current_batch[0]])
@@ -49,8 +47,6 @@ def main():
         if len(current_batch) > 2:
             with col3:
                 display_dog_info(st.session_state.dogs_df.loc[current_batch[2]])
-
-        st.write("---")  # Separator between rows
 
 
 def set_streamlit_page_config():
