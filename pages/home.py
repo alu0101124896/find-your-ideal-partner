@@ -17,9 +17,15 @@ def main():
     set_streamlit_page_config()
 
     show_intro_section()
+    st.markdown("---")
     show_how_it_works_section()
+    st.markdown("---")
     show_why_choose_us_section()
+    st.markdown("---")
+    show_fast_navigation_section()
+    st.markdown("---")
     show_statistics_section()
+    st.markdown("---")
     show_team_section()
 
 
@@ -53,6 +59,10 @@ def show_intro_section():
     ):
         st.switch_page("./pages/recommendation-form.py")
 
+    st.page_link(
+        "./pages/recommendation-form.py",
+    )
+
 
 def show_how_it_works_section():
     """Display the 'How it works' section of the home page."""
@@ -77,7 +87,59 @@ def show_why_choose_us_section():
 
     st.header("¿Por qué elegir nuestro sistema?")
 
-    st.write("...")
+    st.write(
+        "✅ Matching Científico: Basado en características comportamentales y de"
+        + " compatibilidad"
+    )
+    st.write("✅ Datos Reales: Información actualizada de protectoras verificadas")
+    st.write("✅ Proceso Rápido: Encuentra tu match en menos de 5 minutos")
+    st.write("✅ Completamente Gratuito: Sin costes ocultos ni suscripciones")
+
+
+def show_fast_navigation_section():
+    """Display the fast navigation section of the home page."""
+
+    st.header("Navegación rápida")
+
+    left_column_1, right_column_1 = st.columns(2, border=True)
+
+    with left_column_1:
+        st.subheader("🔍 Sistema de Recomendación")
+        st.write("Obtén tu match perfecto")
+        st.button(
+            "Empezar Ahora",
+            use_container_width=True,
+            on_click=lambda: st.switch_page("./pages/recommendation-form.py"),
+        )
+
+    with right_column_1:
+        st.subheader("📚 Catálogo de Adopción")
+        st.write("Explora todos los perros disponibles")
+        st.button(
+            "Ver Perros Disponibles",
+            use_container_width=True,
+            on_click=lambda: st.switch_page("./pages/catalog.py"),
+        )
+
+    left_column_2, right_column_2 = st.columns(2, border=True)
+
+    with left_column_2:
+        st.subheader("📊 Análisis de Datos")
+        st.write("Descubre insights sobre los perros y sus características")
+        st.button(
+            "Ver Análisis",
+            use_container_width=True,
+            on_click=lambda: st.switch_page("./pages/eda.py"),
+        )
+
+    with right_column_2:
+        st.subheader("💭 Comparte tu Opinión")
+        st.write("Ayúdanos a mejorar el sistema")
+        st.button(
+            "Dar Feedback",
+            use_container_width=True,
+            on_click=lambda: st.switch_page("./pages/feedback-form.py"),
+        )
 
 
 def show_statistics_section():
@@ -85,7 +147,16 @@ def show_statistics_section():
 
     st.header("Estadísticas de impacto")
 
-    st.write("...")
+    st.subheader("🎯 Nuestro Compromiso con la Adopción Responsable")
+    st.write(
+        "En España, más de **292,000 perros** llegan cada año a protectoras. Solo el"
+        + " **45%** encuentra un hogar. Nosotros trabajamos para cambiar estas"
+        + " estadísticas mediante tecnología que optimiza el proceso de adopción."
+    )
+    st.write(
+        "**Nuestra misión:** Reducir el tiempo de estancia en refugios y aumentar las"
+        + " adopciones exitosas a través del matching inteligente."
+    )
 
 
 def show_team_section():
@@ -93,7 +164,20 @@ def show_team_section():
 
     st.header("Sobre nosotros")
 
-    st.write("...")
+    st.write(
+        "Somos un pequeño grupo de estudiantes de la Escuela de Organización Industrial"
+        + " (EOI) de Madrid, apasionados por la tecnología y el bienestar animal."
+    )
+    st.write(
+        "Hemos creado esta aplicación como parte de nuestro proyecto final del Curso de"
+        + " Inteligencia Artificial, con el objetivo de ayudar a las protectoras de"
+        + " animales a encontrar hogares para los perros que cuidan."
+    )
+
+    st.subheader("Nuestro equipo está formado por:")
+    st.write(" - **Carla San Miguel Fernández**")
+    st.write(" - **Juan Antolín Jiménez**")
+    st.write(" - **Sergio Tabares Hernández**")
 
 
 if __name__ == "__main__":
