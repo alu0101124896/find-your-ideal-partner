@@ -31,6 +31,7 @@ except ImportError:
 def main():
     """Define the client view of the web-app, including the adoption form."""
 
+    set_streamlit_page_config()
     init_session_state_variables()
     setup_nn_models()
 
@@ -40,6 +41,14 @@ def main():
     success = check_form_submission()
     if success:
         get_and_show_pet_recommendations()
+
+
+def set_streamlit_page_config():
+    """Set up the Streamlit page configuration for this page only."""
+
+    st.set_page_config(
+        layout="centered",
+    )
 
 
 def init_session_state_variables():

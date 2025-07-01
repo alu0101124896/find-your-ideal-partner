@@ -33,6 +33,7 @@ except ImportError:
 def main():
     """Main function to run the EDA page of the web application."""
 
+    set_streamlit_page_config()
     init_session_state_variables()
 
     show_title_and_description()
@@ -40,18 +41,43 @@ def main():
     show_eda_visualizations()
 
 
+def set_streamlit_page_config():
+    """Set up the Streamlit page configuration for this page only."""
+
+    st.set_page_config(
+        layout="centered",
+    )
+
+
 def init_session_state_variables():
     """Initialize session state variables for the catalog page."""
 
     # Load the dogs dataset
     if "dogs_df" not in st.session_state:
-        st.session_state.dogs_df = load_dataset(
-            Path("./data/kiwoko_dogs_data-2025-06-27_12-56-43.csv")
-        ).dropna(
-            subset=[
-                "size",
-                "img_url",
-            ]
+        st.session_state.dogs_df = (
+            load_dataset(Path("./data/kiwoko_dogs_data-2025-06-27_12-56-43.csv"))
+            .dropna(
+                subset=[
+                    "size",
+                    "img_url",
+                ]
+            )
+            .drop(
+                index=[
+                    2023,
+                    8706,
+                    11011,
+                    11221,
+                    11334,
+                    12385,
+                    12541,
+                    12780,
+                    13156,
+                    13377,
+                    13378,
+                ],
+                errors="ignore",
+            )
         )
 
     # Prepare the dataset for visualization

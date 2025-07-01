@@ -14,11 +14,21 @@ import streamlit as st
 def main():
     """Main function to run the home page of the pet adoption recommendation web application."""
 
+    set_streamlit_page_config()
+
     show_intro_section()
     show_how_it_works_section()
     show_why_choose_us_section()
     show_statistics_section()
     show_team_section()
+
+
+def set_streamlit_page_config():
+    """Set up the Streamlit page configuration for this page only."""
+
+    st.set_page_config(
+        layout="centered",
+    )
 
 
 def show_intro_section():

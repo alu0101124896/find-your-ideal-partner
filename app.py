@@ -14,7 +14,7 @@ def main():
     """Main function to run the pet adoption recommendation web application."""
     # Set the page configuration
     st.set_page_config(
-        layout="centered",
+        layout="wide",
         initial_sidebar_state="auto",
     )
 

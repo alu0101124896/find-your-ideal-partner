@@ -18,22 +18,18 @@ except ImportError:
     from ..src.ml_models import load_dataset
 
 
+# Define visualization constants
+ELEMENTS_PER_ROW = 3
+ELEMENTS_PER_PAGE = 6
+
+
 def main():
     """Main function to run the pet adoption catalog page of the web application."""
 
-    set_streamlit_page_config()
     init_session_state_variables()
 
     show_title_and_description()
     show_catalog()
-
-
-def set_streamlit_page_config():
-    """Set up the Streamlit page configuration for this page only."""
-
-    st.set_page_config(
-        layout="wide",
-    )
 
 
 def init_session_state_variables():
@@ -41,20 +37,41 @@ def init_session_state_variables():
 
     # Load the dogs dataset
     if "dogs_df" not in st.session_state:
-        st.session_state.dogs_df = load_dataset(
-            Path("./data/kiwoko_dogs_data-2025-06-27_12-56-43.csv")
-        ).dropna(
-            subset=[
-                "size",
-                "img_url",
-            ]
+        st.session_state.dogs_df = (
+            load_dataset(Path("./data/kiwoko_dogs_data-2025-06-27_12-56-43.csv"))
+            .dropna(
+                subset=[
+                    "size",
+                    "img_url",
+                ]
+            )
+            .drop(
+                index=[
+                    2023,
+                    8706,
+                    11011,
+                    11221,
+                    11334,
+                    12385,
+                    12541,
+                    12780,
+                    13156,
+                    13377,
+                    13378,
+                ],
+                errors="ignore",
+            )
         )
 
     # Create an iterator for the dataset to ease the display of dogs in batches
-    if "dataset_iterator" not in st.session_state:
-        st.session_state.dataset_iterator = iter(
-            batched(st.session_state.dogs_df.index, 3)
-        )
+    if "dataset_shuffled_indexes" not in st.session_state:
+        st.session_state.dataset_shuffled_indexes = st.session_state.dogs_df.sample(
+            frac=1,
+            random_state=42,
+        ).index
+
+    if "dataset_iterator_index" not in st.session_state:
+        st.session_state.dataset_iterator_index = 0
 
 
 def show_title_and_description():
@@ -70,34 +87,72 @@ def show_title_and_description():
 def show_catalog():
     """Display the catalog of dogs available for adoption in batches of three."""
 
-    for current_batch in st.session_state.dataset_iterator:
-        col1, col2, col3 = st.columns(3, border=True)
+    for current_dogs_ids_batch in batched(
+        st.session_state.dataset_shuffled_indexes[
+            st.session_state.dataset_iterator_index : (
+                st.session_state.dataset_iterator_index + ELEMENTS_PER_PAGE
+            )
+        ],
+        ELEMENTS_PER_ROW,
+    ):
+        for current_column, current_dog_id in zip(
+            st.columns(ELEMENTS_PER_ROW, border=True),
+            current_dogs_ids_batch,
+        ):
+            with current_column:
+                display_dog_info(st.session_state.dogs_df.loc[current_dog_id])
 
-        with col1:
-            display_dog_info(st.session_state.dogs_df.loc[current_batch[0]])
-
-        if len(current_batch) > 1:
-            with col2:
-                display_dog_info(st.session_state.dogs_df.loc[current_batch[1]])
-
-        if len(current_batch) > 2:
-            with col3:
-                display_dog_info(st.session_state.dogs_df.loc[current_batch[2]])
+    left_column, center_column, right_column = st.columns(3)
+    with left_column:
+        st.button(
+            "Anterior",
+            use_container_width=True,
+            disabled=st.session_state.dataset_iterator_index <= 0,
+            on_click=lambda: st.session_state.update(
+                dataset_iterator_index=st.session_state.dataset_iterator_index
+                - ELEMENTS_PER_PAGE
+            ),
+        )
+    with center_column:
+        st.markdown(
+            '<div style="text-align: center;">Página '
+            + str(st.session_state.dataset_iterator_index // ELEMENTS_PER_PAGE + 1)
+            + " de "
+            + str(
+                (len(st.session_state.dataset_shuffled_indexes) + ELEMENTS_PER_PAGE - 1)
+                // ELEMENTS_PER_PAGE
+            )
+            + "</div>",
+            unsafe_allow_html=True,
+        )
+    with right_column:
+        st.button(
+            "Siguiente",
+            use_container_width=True,
+            disabled=(
+                st.session_state.dataset_iterator_index + ELEMENTS_PER_PAGE
+                >= len(st.session_state.dataset_shuffled_indexes)
+            ),
+            on_click=lambda: st.session_state.update(
+                dataset_iterator_index=st.session_state.dataset_iterator_index
+                + ELEMENTS_PER_PAGE
+            ),
+        )
 
 
 def display_dog_info(dog):
     """Display information about a dog in the catalog."""
 
-    left_col, right_col = st.columns(2)
+    left_column, right_column = st.columns(2)
 
-    with left_col:
+    with left_column:
         st.image(
             dog["img_url"],
             use_container_width=True,
             caption="Unavailable image" if dog["img_url"] is None else "",
         )
 
-    with right_col:
+    with right_column:
         st.link_button(
             label=f"**{dog["name"]}**",
             url=dog["info_url"],
