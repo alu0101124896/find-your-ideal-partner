@@ -96,7 +96,7 @@ def load_model(model_path):
     return model
 
 
-def load_dataset(file_path):
+def load_dataset(file_path: Path) -> pd.DataFrame:
     """Load the dataset of pets currently available for adoption."""
 
     df = pd.read_csv(file_path, index_col=0)
