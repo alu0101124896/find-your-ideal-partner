@@ -45,26 +45,9 @@ def main():
 
 def set_streamlit_page_config():
     """Set up the Streamlit page configuration and custom styles."""
-    st.set_page_config(
-        page_title="Formulario de adopción",
-        page_icon=":dog:",
-        layout="centered",
-    )
 
-    max_width_str = f"max-width: {80}%;"
-    st.markdown(
-        f"""
-        <style>
-            .stApp {{
-                primary-color: #4bf5ff;
-                background-color: #ffffff;
-                secondary-background-color: #f0f2f5;
-                text-color: #333333;
-            }}
-            .reportview-container .main .block-container{{{max_width_str}}}
-        </style>
-        """,
-        unsafe_allow_html=True,
+    st.set_page_config(
+        layout="centered",
     )
 
 
