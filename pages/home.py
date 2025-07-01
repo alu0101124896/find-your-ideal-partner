@@ -38,7 +38,7 @@ def main():
         "conectando a personas con animales que necesitan un hogar."
     )
 
-   st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
+    st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
     if st.button("Encuentra tu mascota ideal"):
         st.switch_page("recommendation-form"))
     st.markdown("</div>", unsafe_allow_html=True)
