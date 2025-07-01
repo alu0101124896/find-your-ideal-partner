@@ -29,7 +29,7 @@ def main():
 
 
 def set_streamlit_page_config():
-    """Set up the Streamlit page configuration and custom styles."""
+    """Set up the Streamlit page configuration for this page only."""
 
     st.set_page_config(
         layout="wide",

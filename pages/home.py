@@ -14,11 +14,6 @@ import streamlit as st
 def main():
     """Main function to run the home page of the pet adoption recommendation web application."""
 
-    st.set_page_config(
-        page_title="Encuentra tu mascota ideal",
-        layout="wide",
-    )
-
     st.title("Bienvenido a la Aplicación de Recomendación de Adopción de Mascotas")
     st.write(
         "Esta aplicación te ayuda a encontrar la mascota perfecta para ti. "

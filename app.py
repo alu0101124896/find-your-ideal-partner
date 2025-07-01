@@ -11,6 +11,13 @@ import streamlit as st
 
 
 def main():
+    """Main function to run the pet adoption recommendation web application."""
+    # Set the page configuration
+    st.set_page_config(
+        layout="centered",
+        initial_sidebar_state="auto",
+    )
+
     # Set up the Streamlit page configuration
     pg = st.navigation(
         pages=[
