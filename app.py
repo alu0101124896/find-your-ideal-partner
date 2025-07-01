@@ -18,6 +18,7 @@ def main():
                 "./pages/home.py",
                 title="Inicio",
                 icon="🏠",
+                default=True,
             ),
             st.Page(
                 "./pages/recommendation-form.py",
