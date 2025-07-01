@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Interactive Pet Adoption Catalog Web Application
+Interactive Pet Adoption Recommendation Web Application
 
 This file implements the catalog page of a Streamlit web application to display all
 currently available dogs for adoption with a resume of each dog's information, an image
