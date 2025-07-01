@@ -21,18 +21,10 @@ except ImportError:
 def main():
     """Main function to run the pet adoption catalog page of the web application."""
 
-    # Set up the Streamlit page configuration
     set_streamlit_page_config()
-
-    # Initialize session state variables
     init_session_state_variables()
 
-    st.title("Catalogo de Perros en Adopción")
-    st.write(
-        "Aquí puedes ver todos los perros disponibles para adopción. Puedes navegar por"
-        + " el catálogo y ver la información destacada de cada perro."
-    )
-
+    show_title_and_description()
     show_catalog()
 
 
@@ -73,6 +65,16 @@ def init_session_state_variables():
         st.session_state.dataset_iterator = iter(
             batched(st.session_state.dogs_df.index, 3)
         )
+
+
+def show_title_and_description():
+    """Display the title and description of the catalog page."""
+
+    st.title("Catalogo de Perros en Adopción")
+    st.write(
+        "Aquí puedes ver todos los perros disponibles para adopción. Puedes navegar por"
+        + " el catálogo y ver la información destacada de cada perro."
+    )
 
 
 def show_catalog():

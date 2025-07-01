@@ -31,84 +31,16 @@ except ImportError:
 def main():
     """Define the client view of the web-app, including the adoption form."""
 
-    # Set up the Streamlit page configuration
     set_streamlit_page_config()
-
-    # Set up the neural network models
+    init_session_state_variables()
     setup_nn_models()
 
-    # Initialize session state variables
-    init_session_state_variables()
+    show_title_and_description()
+    show_recommendation_form()
 
-    # Create a form for pet adoption
-    with st.form("adoption_form"):
-
-        show_title_and_description_section()
-        st.write("---")
-        show_questions_section()
-        st.write("---")
-        show_terms_and_privacy_section()
-        st.write("---")
-        show_submit_button()
-
-    if not (
-        st.session_state.form_submitted
-        or st.session_state.next_recommendation
-        or st.session_state.previous_recommendation
-    ):
-        # If the form has not been submitted, do not process the input
-        return
-
-    if not (st.session_state.terms_and_conditions and st.session_state.privacy_policy):
-        st.error(
-            "Por favor, acepta los términos y condiciones y la política de privacidad"
-            + " para poder proceder."
-        )
-        return
-
-    if None in st.session_state.client_answers:
-        st.error("Por favor, responde a todas las preguntas del formulario.")
-        return
-
-    if (
-        st.session_state.client_answers[6] == 0
-        or st.session_state.client_answers[7] == 0
-    ):
-        st.warning(
-            "Lo sentimos, pero no podemos recomendarte ninguna mascota en este momento,"
-            + " ten en cuenta que si ya tienes una mascota no amigable en casa, no"
-            + " podemos recomendarte una mascota que pueda no llevarse bien con ella."
-        )
-        return
-
-    if not (
-        st.session_state.next_recommendation or st.session_state.previous_recommendation
-    ):
-        st.session_state.pet_recommendations = get_pet_recommendations(
-            st.session_state.client_answers,
-            st.session_state.number_of_recommendations,
-        )
-
-    st.success("Formulario enviado con éxito!")
-
-    st.write("---")
-    show_navigation_section()
-    st.write("---")
-
-    # Assert that the current pet ID is within the valid range
-    if st.session_state.current_pet_id < 0 or st.session_state.current_pet_id >= len(
-        st.session_state.pet_recommendations
-    ):
-        st.error(
-            "Felicidades, has encontrado un bug en la aplicación, por favor, no le des"
-            + " tan rápido a los botones, gracias por tu paciencia."
-        )
-        return
-
-    # Display the selected recommended pet
-    display_pet_info(
-        st.session_state.pet_recommendations[st.session_state.current_pet_id]
-    )
+    success = check_form_submission()
+    if success:
+        get_and_show_pet_recommendations()
 
 
 def set_streamlit_page_config():
@@ -170,8 +102,8 @@ def init_session_state_variables():
         st.session_state.previous_recommendation = False
 
 
-def show_title_and_description_section():
-    """Display the title and description section of the adoption form."""
+def show_title_and_description():
+    """Display the title and description of the adoption form page."""
 
     st.title("Encuentra a tu mascota ideal 🐕")
     st.subheader("*Descubre al perro perfecto para ti y tu estilo de vida*")
@@ -186,6 +118,17 @@ def show_title_and_description_section():
         + " entorno familiar y expectativas."
     )
     st.write("¡Comencemos el viaje hacia la adopción responsable!")
+
+
+def show_recommendation_form():
+    """Display the adoption recommendation form with questions and terms."""
+
+    with st.form("adoption_form"):
+        show_questions_section()
+        st.write("---")
+        show_terms_and_privacy_section()
+        st.write("---")
+        show_submit_button()
 
 
 def show_questions_section():
@@ -249,6 +192,74 @@ def show_submit_button():
             previous_recommendation=False,
             current_pet_id=0,
         ),
+    )
+
+
+def check_form_submission() -> bool:
+    """Check if the form has been submitted and validate the input data."""
+
+    if not (
+        st.session_state.form_submitted
+        or st.session_state.next_recommendation
+        or st.session_state.previous_recommendation
+    ):
+        # If the form has not been submitted, do not process the input
+        return False
+
+    if not (st.session_state.terms_and_conditions and st.session_state.privacy_policy):
+        st.error(
+            "Por favor, acepta los términos y condiciones y la política de privacidad"
+            + " para poder proceder."
+        )
+        return False
+
+    if None in st.session_state.client_answers:
+        st.error("Por favor, responde a todas las preguntas del formulario.")
+        return False
+
+    if (
+        st.session_state.client_answers[6] == 0
+        or st.session_state.client_answers[7] == 0
+    ):
+        st.warning(
+            "Lo sentimos, pero no podemos recomendarte ninguna mascota en este momento,"
+            + " ten en cuenta que si ya tienes una mascota no amigable en casa, no"
+            + " podemos recomendarte una mascota que pueda no llevarse bien con ella."
+        )
+        return False
+
+    st.success("Formulario enviado con éxito!")
+    return True
+
+
+def get_and_show_pet_recommendations():
+    """Get and display the pet recommendations based on the client's answers."""
+
+    if not (
+        st.session_state.next_recommendation or st.session_state.previous_recommendation
+    ):
+        st.session_state.pet_recommendations = get_pet_recommendations(
+            st.session_state.client_answers,
+            st.session_state.number_of_recommendations,
+        )
+
+    st.write("---")
+    show_navigation_section()
+    st.write("---")
+
+    # Assert that the current pet ID is within the valid range
+    if st.session_state.current_pet_id < 0 or st.session_state.current_pet_id >= len(
+        st.session_state.pet_recommendations
+    ):
+        st.error(
+            "Felicidades, has encontrado un bug en la aplicación, por favor, no le des"
+            + " tan rápido a los botones, gracias por tu paciencia."
+        )
+        return
+
+    # Display the selected recommended pet
+    display_pet_info(
+        st.session_state.pet_recommendations[st.session_state.current_pet_id]
     )
 
 
