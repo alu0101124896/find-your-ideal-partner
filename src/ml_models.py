@@ -9,7 +9,6 @@ recommendation system. It includes functions to load the models, preprocess inpu
 from pathlib import Path
 import pickle
 
-import numpy as np
 import pandas as pd
 from pandas.core.dtypes.common import is_bool_dtype
 from sklearn.preprocessing import MinMaxScaler
@@ -23,7 +22,6 @@ try:
         PET_SIZE_ENCODING,
         INV_PET_SIZE_ENCODING,
     )
-    from src.vae import VAE
 except ImportError:
     from encodings import (
         PET_GENDER_ENCODING,
@@ -31,11 +29,9 @@ except ImportError:
         PET_SIZE_ENCODING,
         INV_PET_SIZE_ENCODING,
     )
-    from vae import VAE
 
 
 __knn_model = None
-# __vae_model = None
 __scaler_model = None
 __chars_means = None
 __dogs_df = None
@@ -43,14 +39,12 @@ __dogs_train_df = None
 
 
 def setup_nn_models(
-    knn_model_path: Path = Path("./models/knn_dog_adoption-2025-06-29_21-34-56.pkl"),
-    vae_model_path: Path = Path("./models/vae_dog_adoption-2025-06-29_21-34-56.pkl"),
+    knn_model_path: Path = Path("./models/knn_dog_adoption-2025-07-01_18-10-09.pkl"),
     dogs_df_path: Path = Path("./data/kiwoko_dogs_data-2025-06-27_12-56-43.csv"),
 ):
     """Set up the neural network models for the application."""
 
     global __knn_model
-    # global __vae_model
     global __scaler_model
     global __chars_means
     global __dogs_df
@@ -59,10 +53,6 @@ def setup_nn_models(
     # Load the pre-trained KNN model
     __knn_model = load_model(knn_model_path)
     assert isinstance(__knn_model, NearestNeighbors)
-
-    # # Load the pre-trained VAE model
-    # __vae_model = load_model(vae_model_path)
-    # assert isinstance(__vae_model, VAE)
 
     # Load the dataset of pets currently available for adoption
     __dogs_df = load_dataset(dogs_df_path)
@@ -165,7 +155,6 @@ def preprocess_train_data(
                 "name",
                 "breed",
                 "province",  # Temporarily dropped, may be useful but needs some preprocessing
-                "can_travel",  # Same as 'province'
                 "is_dewormed",  # Highly correlated with is_vaccinated
                 "is_identified",  # Highly correlated with is_vaccinated
                 "has_microchip",  # Highly correlated with is_vaccinated
@@ -289,6 +278,7 @@ def client_answers_to_pet_features(client_answers: list[float]) -> pd.Series:
                 + (client_answers[4] * 0.3)
                 + (client_answers[9] * 0.1)
             ),
+            "can_travel": client_answers[0],
             "urgent_adoption": client_answers[0],
             "needs_vet_care": ((client_answers[4] * 0.7) + (client_answers[9] * 0.3)),
             "is_vaccinated": client_answers[5],
@@ -320,30 +310,6 @@ def client_answers_to_pet_features(client_answers: list[float]) -> pd.Series:
 
 def preprocess_input_data(input_data: pd.Series) -> pd.DataFrame:
     """Preprocess the input data for the machine learning models."""
-
-    # Now the input data never contains NaN values, so we can skip the value imputation
-    #  and scaling steps, as the input data is already in the expected format for the
-    #  KNN model.
-
-    # # Drop NaN values from the input
-    # filtered_input_data = input_data.dropna()
-    #
-    # # Encode categorical and boolean features
-    # encoded_input_data = encode_non_numeric_features(filtered_input_data)
-    #
-    # # Fill missing values with the mean of each feature
-    # mean_filled_input_data = fill_features_with_means(encoded_input_data)
-    #
-    # # Scale the numerical features
-    # scaled_input_data = scale_numerical_features(mean_filled_input_data)
-    #
-    # # Check if there hava been any features that were not provided by the user, if there
-    # #  is any, get coherent values for those features from the pre-trained VAE model
-    # complete_input_data = (
-    #     impute_realistic_values(scaled_input_data, encoded_input_data.index)
-    #     if any(input_data.isna())
-    #     else scaled_input_data
-    # )
 
     # Reshape the input to match the expected format for the KNN model
     preprocessed_input_data = pd.DataFrame(
@@ -487,41 +453,3 @@ def unscale_numerical_features(
     )
 
     return unscaled_input
-
-
-# def impute_realistic_values(
-#     input_data: pd.Series,
-#     user_provided_features: list[str] = None,
-#     vae_model: VAE = None,
-# ) -> pd.Series:
-#     """Impute realistic values for the client input data using a pre-trained VAE model."""
-#
-#     if vae_model is None:
-#         global __vae_model
-#         assert isinstance(__vae_model, VAE)
-#         vae_model = __vae_model
-#
-#     reconstructed_input_data = input_data.copy()
-#
-#     # Convert the client input to a tensor
-#     input_tensor = torch.tensor(
-#         input_data.values.astype(np.float32).reshape(1, -1),
-#         dtype=torch.float32,
-#     )
-#
-#     # Evaluate the VAE model to get the reconstructed output
-#     model_inference_result = vae_model.impute_missing_values(input_tensor)
-#
-#     # Convert the reconstructed output back to a pandas Series and ensure the
-#     #  reconstructed output is on the CPU and detached from the computation graph
-#     reconstructed_input_data.update(
-#         pd.Series(
-#             model_inference_result.cpu().detach().squeeze().numpy(),
-#             index=input_data.index,
-#         ).loc[
-#             # ignore the features that WERE provided by the user
-#             (index not in user_provided_features for index in input_data.index)
-#         ]
-#     )
-#
-#     return reconstructed_input_data

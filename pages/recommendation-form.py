@@ -279,7 +279,11 @@ def display_pet_info(pet):
     """Display the information of the recommended pet."""
 
     st.title(pet["name"])
-    st.subheader(" 🔴 ¡Urge adopción! 🔴" if pet["urgent_adoption"] else "")
+    st.subheader(
+        "🔴 Necesito hogar urgente, ¿me ayudas a encontrarlo? 🔴"
+        if pet["urgent_adoption"]
+        else ""
+    )
     st.image(pet["img_url"], caption="", use_container_width=True)
 
     st.subheader("Descripción:")
@@ -298,13 +302,13 @@ def display_pet_info(pet):
         st.subheader("Características:")
 
         st.write(
-            ("♂" if pet["gender"] == "Macho" else "♀") + f" Género: {pet['gender']}"
+            ("♂" if pet["gender"] == "Macho" else "♀") + f" Género: {pet["gender"]}"
         )
-        st.write(f"🎂 Edad: {pet['age']} años")
-        st.write(f"📏 Tamaño: {pet['size']}")
-        st.write(f"🐾 Raza: {pet['breed']}")
-        st.write(f"🌍 Provincia: {pet['province']}")
-        st.write(f"🛩️ Puede viajar: {'Sí' if pet['can_travel'] else 'No'}")
+        st.write(f"🎂 Edad: {pet["age"]} años")
+        st.write(f"📏 Tamaño: {pet["size"]}")
+        st.write(f"🐾 Raza: {pet["breed"]}")
+        st.write(f"🌍 Provincia: {pet["province"]}")
+        st.write(f"🛩️ Puede viajar: {"Sí" if pet["can_travel"] else "No"}")
 
     with right_col_1:
         st.subheader("Salud y cuidados:")
@@ -371,6 +375,7 @@ def display_pet_info(pet):
         )
 
     with right_col_2:
+        st.subheader("Personalidad de la mascota:")
         if any(
             [
                 pet["is_affectionate"],
@@ -381,7 +386,6 @@ def display_pet_info(pet):
                 pet["is_sedentary"],
             ]
         ):
-            st.subheader("Personalidad de la mascota:")
             if pet["is_affectionate"]:
                 st.write("❤️ Cariñoso")
             if pet["is_hyperactive"]:
@@ -394,6 +398,12 @@ def display_pet_info(pet):
                 st.write("🛏️ Tranquilo")
             if pet["is_sedentary"]:
                 st.write("🐢 Sedentario")
+
+        else:
+            st.write(
+                "No se han especificado características específicas para esta mascota,"
+                + " pero ello no quita que sea una gran opción para adoptar."
+            )
 
     st.write("---")
 

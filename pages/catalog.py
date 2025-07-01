@@ -98,10 +98,10 @@ def display_dog_info(dog):
             url=dog["info_url"],
         )
 
-        st.write(f"**Edad:** {dog['age']} años")
-        st.write(f"**Tamaño:** {dog['size']}")
-        st.write(f"**Provincia:** {dog['province']}")
-        st.write(f"**Puede viajar:** {'Sí' if dog['can_travel'] else 'No'}")
+        st.write(f"**Edad:** {dog["age"]} años")
+        st.write(f"**Tamaño:** {dog["size"]}")
+        st.write(f"**Provincia:** {dog["province"]}")
+        st.write(f"**Puede viajar:** {"Sí" if dog["can_travel"] else "No"}")
 
         emojis = []
         if dog["good_with_children"]:
