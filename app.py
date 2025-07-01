@@ -3,7 +3,7 @@
 Interactive Pet Adoption Recommendation Web Application
 
 This module implements a Streamlit web application for pet adoption recommendations based on user characteristics and
-preferences using pre-trained neural network models. It provides a user-friendly interface for clients to fill out an
+preferences using a Nearest-Neighbors search algorithm. It provides a user-friendly interface for clients to fill out an
 adoption form and receive personalized pet recommendations.
 """
 
