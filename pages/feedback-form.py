@@ -10,7 +10,7 @@ import streamlit.components.v1 as components
 st.title("Formulario de opinón")
 
 google_form_embed_code = """
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfO3vW8yXCm57oNMjySB5NsGf6bLTG3an3J2OXtJppwMVWT8A/viewform?embedded=true" width="400" height="100" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfO3vW8yXCm57oNMjySB5NsGf6bLTG3an3J2OXtJppwMVWT8A/viewform?embedded=true" width="700" height="1000" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
 """
 
 
