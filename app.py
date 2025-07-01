@@ -20,6 +20,11 @@ def main():
                 icon="🏠",
             ),
             st.Page(
+                "./pages/recommendation-form.py",
+                title="Formulario de recomendación",
+                icon="🐶",
+            ),
+            st.Page(
                 "./pages/catalog.py",
                 title="Catálogo de adopción",
                 icon="🐾",
@@ -29,11 +34,6 @@ def main():
                 "./pages/eda.py",
                 title="Análisis exploratorio de datos",
                 icon="📊",
-            ),
-            st.Page(
-                "./pages/recommendation-form.py",
-                title="Formulario de recomendación",
-                icon="🐶",
             ),
             st.Page(
                 "./pages/feedback-form.py",
