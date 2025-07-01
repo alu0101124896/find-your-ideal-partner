@@ -257,9 +257,9 @@ def display_pet_info(pet):
     ):
         st.write(pet["description_2"].strip())
 
-    left_col, right_col = st.columns(2)
+    left_col_1, right_col_1 = st.columns(2, border=True)
 
-    with left_col:
+    with left_col_1:
         st.subheader("Características:")
 
         st.write(
@@ -271,7 +271,7 @@ def display_pet_info(pet):
         st.write(f"🌍 Provincia: {pet['province']}")
         st.write(f"🛩️ Puede viajar: {'Sí' if pet['can_travel'] else 'No'}")
 
-    with right_col:
+    with right_col_1:
         st.subheader("Salud y cuidados:")
         st.write(
             "🩺 "
@@ -306,55 +306,59 @@ def display_pet_info(pet):
             "🛂 " + ("Tiene pasaporte" if pet["has_passport"] else "No tiene pasaporte")
         )
 
-    st.subheader("Compatibilidades:")
-    st.write(
-        "👶 "
-        + (
-            "Compatible con niños"
-            if pet["good_with_children"]
-            else "No es compatible con niños"
-        )
-    )
-    st.write(
-        "🐱 "
-        + (
-            "Compatible con gatos"
-            if pet["good_with_cats"]
-            else "No es compatible con gatos"
-        )
-    )
-    st.write(
-        "🐶 "
-        + (
-            "Compatible con perros"
-            if pet["good_with_dogs"]
-            else "No es compatible con perros"
-        )
-    )
+    left_col_2, right_col_2 = st.columns(2, border=True)
 
-    if any(
-        [
-            pet["is_affectionate"],
-            pet["is_hyperactive"],
-            pet["is_fearful"],
-            pet["is_sociable"],
-            pet["is_calm"],
-            pet["is_sedentary"],
-        ]
-    ):
-        st.subheader("Personalidad de la mascota:")
-        if pet["is_affectionate"]:
-            st.write("❤️ Cariñoso")
-        if pet["is_hyperactive"]:
-            st.write("⚡ Hiperactivo")
-        if pet["is_fearful"]:
-            st.write("😨 Miedoso")
-        if pet["is_sociable"]:
-            st.write("👥 Sociable")
-        if pet["is_calm"]:
-            st.write("🛏️ Tranquilo")
-        if pet["is_sedentary"]:
-            st.write("🐢 Sedentario")
+    with left_col_2:
+        st.subheader("Compatibilidades:")
+        st.write(
+            "👶 "
+            + (
+                "Compatible con niños"
+                if pet["good_with_children"]
+                else "No es compatible con niños"
+            )
+        )
+        st.write(
+            "🐱 "
+            + (
+                "Compatible con gatos"
+                if pet["good_with_cats"]
+                else "No es compatible con gatos"
+            )
+        )
+        st.write(
+            "🐶 "
+            + (
+                "Compatible con perros"
+                if pet["good_with_dogs"]
+                else "No es compatible con perros"
+            )
+        )
+
+    with right_col_2:
+        if any(
+            [
+                pet["is_affectionate"],
+                pet["is_hyperactive"],
+                pet["is_fearful"],
+                pet["is_sociable"],
+                pet["is_calm"],
+                pet["is_sedentary"],
+            ]
+        ):
+            st.subheader("Personalidad de la mascota:")
+            if pet["is_affectionate"]:
+                st.write("❤️ Cariñoso")
+            if pet["is_hyperactive"]:
+                st.write("⚡ Hiperactivo")
+            if pet["is_fearful"]:
+                st.write("😨 Miedoso")
+            if pet["is_sociable"]:
+                st.write("👥 Sociable")
+            if pet["is_calm"]:
+                st.write("🛏️ Tranquilo")
+            if pet["is_sedentary"]:
+                st.write("🐢 Sedentario")
 
     st.write("---")
 
