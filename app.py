@@ -16,28 +16,28 @@ def main():
         pages=[
             st.Page(
                 "./pages/home.py",
-                title="Home",
+                title="Inicio",
                 icon="🏠",
             ),
             st.Page(
                 "./pages/catalog.py",
-                title="Pet Catalog",
+                title="Catálogo de adopción",
                 icon="🐾",
                 url_path="catalog",
             ),
             st.Page(
                 "./pages/eda.py",
-                title="Exploratory Data Analysis",
+                title="Análisis exploratorio de datos",
                 icon="📊",
             ),
             st.Page(
                 "./pages/recommendation-form.py",
-                title="Pet Recommendation Form",
+                title="Formulario de recomendación",
                 icon="🐶",
             ),
             st.Page(
                 "./pages/feedback-form.py",
-                title="Feedback Form",
+                title="Danos tu opinión!",
                 icon="✍️",
             ),
         ],
