@@ -43,6 +43,11 @@ def init_session_state_variables():
     if "dogs_df" not in st.session_state:
         st.session_state.dogs_df = load_dataset(
             Path("./data/kiwoko_dogs_data-2025-06-27_12-56-43.csv")
+        ).dropna(
+            subset=[
+                "size",
+                "img_url",
+            ]
         )
 
     # Create an iterator for the dataset to ease the display of dogs in batches
