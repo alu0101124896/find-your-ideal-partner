@@ -38,6 +38,9 @@ def main():
         "conectando a personas con animales que necesitan un hogar."
     )
 
+    st.markdown("<p style='text-align: center;'>", unsafe_allow_html=True)
+    st.link_button("Encuentra tu mascota ideal", "https://find-your-ideal-partner.streamlit.app/recommendation-form")
+    st.markdown("</p>", unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
