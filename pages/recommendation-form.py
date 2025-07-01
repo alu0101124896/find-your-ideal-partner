@@ -6,13 +6,22 @@
 import streamlit as st
 
 
-from src.questions import (
-    QUESTIONS,
-)
-from src.ml_models import (
-    setup_nn_models,
-    get_pet_recommendations,
-)
+try:
+    from src.questions import (
+        QUESTIONS,
+    )
+    from src.ml_models import (
+        setup_nn_models,
+        get_pet_recommendations,
+    )
+except ImportError:
+    from ..src.questions import (
+        QUESTIONS,
+    )
+    from ..src.ml_models import (
+        setup_nn_models,
+        get_pet_recommendations,
+    )
 
 
 def main():
