@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-# ToDo: Add a brief description of the catalog page functionality and purpose.
+Interactive Pet Adoption Catalog Web Application
+
+This file implements the catalog page of a Streamlit web application to display all
+currently available dogs for adoption with a resume of each dog's information, an image
+and a link to the dog's original page on the Kiwoko website.
 """
 
 from itertools import batched
@@ -15,18 +19,13 @@ except ImportError:
 
 
 def main():
+    """Main function to run the pet adoption catalog page of the web application."""
+
+    # Set up the Streamlit page configuration
     set_streamlit_page_config()
 
-    if "dogs_df" not in st.session_state:
-        # Load the dataset and store it in the session state
-        st.session_state.dogs_df = load_dataset(
-            Path("./data/kiwoko_dogs_data-2025-06-27_12-56-43.csv")
-        )
-    if "dataset_iterator" not in st.session_state:
-        # Create an iterator for the dataset to allow loading dogs in batches
-        st.session_state.dataset_iterator = iter(
-            batched(st.session_state.dogs_df.index, 3)
-        )
+    # Initialize session state variables
+    init_session_state_variables()
 
     st.title("Catalogo de Perros en Adopción")
     st.write(
@@ -34,19 +33,7 @@ def main():
         + " el catálogo y ver la información destacada de cada perro."
     )
 
-    for current_batch in st.session_state.dataset_iterator:
-        col1, col2, col3 = st.columns(3, border=True)
-
-        with col1:
-            display_dog_info(st.session_state.dogs_df.loc[current_batch[0]])
-
-        if len(current_batch) > 1:
-            with col2:
-                display_dog_info(st.session_state.dogs_df.loc[current_batch[1]])
-
-        if len(current_batch) > 2:
-            with col3:
-                display_dog_info(st.session_state.dogs_df.loc[current_batch[2]])
+    show_catalog()
 
 
 def set_streamlit_page_config():
@@ -70,6 +57,40 @@ def set_streamlit_page_config():
         """,
         unsafe_allow_html=True,
     )
+
+
+def init_session_state_variables():
+    """Initialize session state variables for the catalog page."""
+
+    # Load the dogs dataset
+    if "dogs_df" not in st.session_state:
+        st.session_state.dogs_df = load_dataset(
+            Path("./data/kiwoko_dogs_data-2025-06-27_12-56-43.csv")
+        )
+
+    # Create an iterator for the dataset to ease the display of dogs in batches
+    if "dataset_iterator" not in st.session_state:
+        st.session_state.dataset_iterator = iter(
+            batched(st.session_state.dogs_df.index, 3)
+        )
+
+
+def show_catalog():
+    """Display the catalog of dogs available for adoption in batches of three."""
+
+    for current_batch in st.session_state.dataset_iterator:
+        col1, col2, col3 = st.columns(3, border=True)
+
+        with col1:
+            display_dog_info(st.session_state.dogs_df.loc[current_batch[0]])
+
+        if len(current_batch) > 1:
+            with col2:
+                display_dog_info(st.session_state.dogs_df.loc[current_batch[1]])
+
+        if len(current_batch) > 2:
+            with col3:
+                display_dog_info(st.session_state.dogs_df.loc[current_batch[2]])
 
 
 def display_dog_info(dog):
