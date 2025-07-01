@@ -59,10 +59,6 @@ def show_intro_section():
     ):
         st.switch_page("./pages/recommendation-form.py")
 
-    st.page_link(
-        "./pages/recommendation-form.py",
-    )
-
 
 def show_how_it_works_section():
     """Display the 'How it works' section of the home page."""
