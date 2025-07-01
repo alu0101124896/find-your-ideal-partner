@@ -257,44 +257,54 @@ def display_pet_info(pet):
     ):
         st.write(pet["description_2"].strip())
 
-    st.subheader("Características:")
+    left_col, right_col = st.columns(2)
 
-    st.write(("♂" if pet["gender"] == "Macho" else "♀") + f" Género: {pet['gender']}")
-    st.write(f"🎂 Edad: {pet['age']} años")
-    st.write(f"📏 Tamaño: {pet['size']}")
-    st.write(f"🐾 Raza: {pet['breed']}")
-    st.write(f"🌍 Provincia: {pet['province']}")
-    st.write(f"🛩️ Puede viajar: {'Sí' if pet['can_travel'] else 'No'}")
+    with left_col:
+        st.subheader("Características:")
 
-    st.subheader("Salud y cuidados:")
-    st.write(
-        "🩺 "
-        + (
-            "Necesita cuidados veterinarios"
-            if pet["needs_vet_care"]
-            else "No necesita cuidados veterinarios especiales"
+        st.write(
+            ("♂" if pet["gender"] == "Macho" else "♀") + f" Género: {pet['gender']}"
         )
-    )
-    if pet["is_healthy"]:
-        st.write("💚 Está sano")
-    st.write("💉 " + ("Está vacunado" if pet["is_vaccinated"] else "No está vacunado"))
-    st.write(
-        "🪱 "
-        + ("Está desparasitado" if pet["is_dewormed"] else "No está desparasitado")
-    )
-    st.write(
-        "✂️ " + ("Está esterilizado" if pet["is_sterilized"] else "No está esterilizado")
-    )
-    st.write(
-        "🪪 "
-        + ("Está identificado" if pet["is_identified"] else "No está identificado")
-    )
-    st.write(
-        "📌 " + ("Tiene microchip" if pet["has_microchip"] else "No tiene microchip")
-    )
-    st.write(
-        "🛂 " + ("Tiene pasaporte" if pet["has_passport"] else "No tiene pasaporte")
-    )
+        st.write(f"🎂 Edad: {pet['age']} años")
+        st.write(f"📏 Tamaño: {pet['size']}")
+        st.write(f"🐾 Raza: {pet['breed']}")
+        st.write(f"🌍 Provincia: {pet['province']}")
+        st.write(f"🛩️ Puede viajar: {'Sí' if pet['can_travel'] else 'No'}")
+
+    with right_col:
+        st.subheader("Salud y cuidados:")
+        st.write(
+            "🩺 "
+            + (
+                "Necesita cuidados veterinarios"
+                if pet["needs_vet_care"]
+                else "No necesita cuidados veterinarios especiales"
+            )
+        )
+        if pet["is_healthy"]:
+            st.write("💚 Está sano")
+        st.write(
+            "💉 " + ("Está vacunado" if pet["is_vaccinated"] else "No está vacunado")
+        )
+        st.write(
+            "🪱 "
+            + ("Está desparasitado" if pet["is_dewormed"] else "No está desparasitado")
+        )
+        st.write(
+            "✂️ "
+            + ("Está esterilizado" if pet["is_sterilized"] else "No está esterilizado")
+        )
+        st.write(
+            "🪪 "
+            + ("Está identificado" if pet["is_identified"] else "No está identificado")
+        )
+        st.write(
+            "📌 "
+            + ("Tiene microchip" if pet["has_microchip"] else "No tiene microchip")
+        )
+        st.write(
+            "🛂 " + ("Tiene pasaporte" if pet["has_passport"] else "No tiene pasaporte")
+        )
 
     st.subheader("Compatibilidades:")
     st.write(
