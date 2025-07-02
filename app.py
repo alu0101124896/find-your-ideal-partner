@@ -20,6 +20,7 @@ def main():
 
     # Set up the Streamlit page configuration
     pg = st.navigation(
+        position="top",
         pages=[
             st.Page(
                 "./pages/home.py",
@@ -49,7 +50,6 @@ def main():
                 icon="✍️",
             ),
         ],
-        expanded=True,
     )
     pg.run()
 
