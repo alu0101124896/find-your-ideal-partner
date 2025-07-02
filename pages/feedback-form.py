@@ -38,6 +38,7 @@ def show_feedback_form_section():
                     src="https://docs.google.com/forms/d/e/1FAIpQLSfO3vW8yXCm57oNMjySB5NsGf6bLTG3an3J2OXtJppwMVWT8A/viewform?embedded=true"
                     width="700"
                     height="600"
+                    scrolling="yes"
                     frameborder="0"
                     marginheight="0"
                     marginwidth="0"
