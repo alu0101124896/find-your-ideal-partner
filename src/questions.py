@@ -1,3 +1,12 @@
+# -*- coding: utf-8 -*-
+"""
+Questions for the Pet Adoption Recommendation System
+
+This module defines the questions and available options for the form used in the Pet
+Adoption Recommendation System.
+"""
+
+
 QUESTIONS = [
     {
         "question": "1. Preferencia de género del animal",
