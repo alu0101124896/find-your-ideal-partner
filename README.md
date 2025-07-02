@@ -104,3 +104,6 @@ streamlit run app.py
 A new web browser tab should open with the app running. If it doesn't, you can manually open your web browser and go to `http://localhost:8501`.
 
 The app will prompt you to answer a series of questions about your lifestyle and preferences. Based on your answers, it will recommend a pet that best suits you.
+
+## Disclaimer
+This project is currently in development and may contain bugs or incomplete features. The recommendations provided by the system are based on the data available and may not always be accurate. Always consider visiting a local shelter or adoption center to meet the pets in person before making a decision. We do not guarantee the availability of the pets listed in the recommendations, as they may have already been adopted or are no longer available for adoption, and we are not responsible for any issues that may arise from the adoption process.
