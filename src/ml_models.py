@@ -23,7 +23,7 @@ try:
         INV_PET_SIZE_ENCODING,
     )
 except ImportError:
-    from encodings import (
+    from ..src.encodings import (
         PET_GENDER_ENCODING,
         INV_PET_GENDER_ENCODING,
         PET_SIZE_ENCODING,
