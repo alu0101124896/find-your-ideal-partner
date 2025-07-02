@@ -102,40 +102,40 @@ def show_fast_navigation_section():
     with left_column_1:
         st.subheader("🔍 Sistema de Recomendación")
         st.write("Obtén tu match perfecto")
-        st.button(
+        if st.button(
             "Empezar Ahora",
             use_container_width=True,
-            on_click=lambda: st.switch_page("./pages/recommendation-form.py"),
-        )
+        ):
+            st.switch_page("./pages/recommendation-form.py")
 
     with right_column_1:
         st.subheader("📚 Catálogo de Adopción")
         st.write("Explora todos los perros disponibles")
-        st.button(
+        if st.button(
             "Ver Perros Disponibles",
             use_container_width=True,
-            on_click=lambda: st.switch_page("./pages/catalog.py"),
-        )
+        ):
+            st.switch_page("./pages/catalog.py")
 
     left_column_2, right_column_2 = st.columns(2, border=True)
 
     with left_column_2:
         st.subheader("📊 Análisis de Datos")
         st.write("Descubre insights sobre los perros y sus características")
-        st.button(
+        if st.button(
             "Ver Análisis",
             use_container_width=True,
-            on_click=lambda: st.switch_page("./pages/eda.py"),
-        )
+        ):
+            st.switch_page("./pages/eda.py")
 
     with right_column_2:
         st.subheader("💭 Comparte tu Opinión")
         st.write("Ayúdanos a mejorar el sistema")
-        st.button(
+        if st.button(
             "Dar Feedback",
             use_container_width=True,
-            on_click=lambda: st.switch_page("./pages/feedback-form.py"),
-        )
+        ):
+            st.switch_page("./pages/feedback-form.py")
 
 
 def show_statistics_section():
