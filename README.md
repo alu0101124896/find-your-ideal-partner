@@ -69,7 +69,6 @@ Make sure to download the version 3.12 or later, as this project has been tested
 After installing Python, it is highly recommended to create a virtual environment to manage dependencies. You can do this using the following commands:
 
 ```bash
-# Create a virtual environment (optional but recommended)
 python -m venv venv
 ```
 
