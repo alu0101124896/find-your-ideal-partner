@@ -67,7 +67,6 @@ def init_session_state_variables():
     if "dataset_shuffled_indexes" not in st.session_state:
         st.session_state.dataset_shuffled_indexes = st.session_state.dogs_df.sample(
             frac=1,
-            random_state=42,
         ).index
 
     if "dataset_iterator_index" not in st.session_state:
