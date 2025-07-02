@@ -30,7 +30,7 @@ def set_streamlit_page_config():
 def show_feedback_form_section():
     """Display the feedback form section of the page."""
 
-    st.title("Formulario de opinón")
+    st.title("Cuestionario de retroalimentación")
 
     components.html(
         """
