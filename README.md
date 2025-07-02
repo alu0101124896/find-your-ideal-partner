@@ -57,6 +57,43 @@ The resulting tool is deployed as a web application using Streamlit and it's ava
 
 Note: The provided versions are the only ones tested. Other versions may work but are not guaranteed.
 
+
+### Python installation
+
+To run this project, you need to have Python installed on your machine. You can download it from [python.org](https://www.python.org/downloads/).
+
+Make sure to download the version 3.12 or later, as this project has been tested with Python 3.12. After downloading, follow the installation instructions for your operating system.
+
+### Virtual Environment setup (optional but recommended)
+
+After installing Python, it is highly recommended to create a virtual environment to manage dependencies. You can do this using the following commands:
+
+```bash
+# Create a virtual environment (optional but recommended)
+python -m venv venv
+```
+
+Then, activate the virtual environment:
+
+
+#### On Windows
+```bash
+venv\Scripts\activate
+```
+
+#### On macOS/Linux
+```bash
+source venv/bin/activate
+```
+
+### Python dependencies installation
+
+Finally, install the required packages using the `requirements.txt` file:
+
+```bash
+pip install -r requirements.txt
+```
+
 ## Local usage
 
 To run the Streamlit app locally, use the following command in your terminal at the root of this project directory:
