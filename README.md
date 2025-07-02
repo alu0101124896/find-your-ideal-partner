@@ -1,3 +1,6 @@
+[![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
+
+
 # Find Your Ideal Partner
 
 This project consists of the development of an AI-powered pet recommendation system, which guides users in selecting a pet that best fits their lifestyle and preferences, making the process of pet adoption more informed and personalized, and ultimately enhancing the well-being of both pets and their owners, while also reducing the number of abandoned animals and promoting responsible pet ownership.
@@ -64,6 +67,7 @@ To run this project, you need to have Python installed on your machine. You can 
 
 Make sure to download the version 3.12 or later, as this project has been tested with Python 3.12. After downloading, follow the installation instructions for your operating system.
 
+
 ### Virtual Environment setup (optional but recommended)
 
 After installing Python, it is highly recommended to create a virtual environment to manage dependencies. You can do this using the following commands:
@@ -85,6 +89,7 @@ Then, activate the virtual environment:
    source venv/bin/activate
    ```
 
+
 ### Python dependencies installation
 
 Finally, install the required packages using the `requirements.txt` file:
@@ -92,6 +97,7 @@ Finally, install the required packages using the `requirements.txt` file:
 ```bash
 pip install -r requirements.txt
 ```
+
 
 ## Local usage
 
@@ -105,5 +111,18 @@ A new web browser tab should open with the app running. If it doesn't, you can m
 
 The app will prompt you to answer a series of questions about your lifestyle and preferences. Based on your answers, it will recommend a pet that best suits you.
 
+
 ## Disclaimer
 This project is currently in development and may contain bugs or incomplete features. The recommendations provided by the system are based on the data available and may not always be accurate. Always consider visiting a local shelter or adoption center to meet the pets in person before making a decision. We do not guarantee the availability of the pets listed in the recommendations, as they may have already been adopted or are no longer available for adoption, and we are not responsible for any issues that may arise from the adoption process.
+
+
+## License
+
+This work is licensed under a
+[Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa].
+
+[![CC BY-NC-SA 4.0][cc-by-nc-sa-image]][cc-by-nc-sa]
+
+[cc-by-nc-sa]: http://creativecommons.org/licenses/by-nc-sa/4.0/
+[cc-by-nc-sa-image]: https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png
+[cc-by-nc-sa-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg
