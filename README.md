@@ -39,20 +39,20 @@ The resulting tool is deployed as a web application using Streamlit and it's ava
 
 
 ## Requirements
-- Python 3.12
+- Python: 3.12
 
-- NumPy 1.26.4
-- Pandas 2.2.3
-- GeoPandas 1.1.1
+- NumPy: 1.26.4
+- Pandas: 2.2.3
+- GeoPandas: 1.1.1
 
-- Scikit-learn 1.6.1
-- SciPy 1.13.1
-- Torch 2.7.1
+- Scikit-learn: 1.6.1
+- SciPy: 1.13.1
+- Torch: 2.7.1
 
-- Matplotlib 3.10.3
-- Seaborn 0.13.2
+- Matplotlib: 3.10.3
+- Seaborn: 0.13.2
 
-- Streamlit 1.46.0
+- Streamlit: 1.46.0
 
 
 Note: The provided versions are the only ones tested. Other versions may work but are not guaranteed.
