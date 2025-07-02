@@ -224,7 +224,7 @@ def get_pet_recommendations(
     knn_model: NearestNeighbors = None,
     dogs_df: pd.DataFrame = None,
     dogs_train_df: pd.DataFrame = None,
-) -> list[pd.Series]:
+) -> list[pd.DataFrame]:
     """Get pet recommendations based on the given input data using a KNN model."""
 
     if knn_model is None:
