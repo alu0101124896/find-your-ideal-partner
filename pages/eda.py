@@ -209,6 +209,7 @@ def show_choropleth_map():
         linewidth=0.3,
         legend_kwds={
             "shrink": 0.8,
+            "label": "Número de perros",
         },
     )
 
