@@ -165,6 +165,8 @@ def show_age_size_gender_boxplot():
         x="size",
         y="age",
         hue="gender",
+        hue_order=["Hembra", "Macho"],
+        order=["Enano", "Pequeño", "Mediano", "Grande", "Gigante"],
         palette=sns.color_palette("Pastel1", n_colors=2),
         data=st.session_state.dogs_df.loc[(st.session_state.dogs_df["age"] < 50)],
         ax=ax,
