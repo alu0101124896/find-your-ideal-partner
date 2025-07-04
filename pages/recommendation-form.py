@@ -289,7 +289,7 @@ def display_pet_info(pet):
 
     st.title(pet["name"])
     st.subheader(
-        "🔴 Necesito hogar urgente, ¿me ayudas a encontrarlo? 🔴"
+        "🔴 Necesito hogar urgente, ¿me ayudas a encontrarlo?"
         if pet["urgent_adoption"]
         else ""
     )
